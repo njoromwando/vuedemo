@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="numbers">
+            <label for="Name">To Upper Test</label>
+            <input type="text"  v-model="namee"   @blur="stringtoupper" name="namee" >
+        <label for="Amount">Amount</label>
+        <input type="text"  v-model="amount"  @keydown="numbersValidate" @keyup="addcommasnew"  id="amount" >
+        <label for="Amount">Rate</label>
+        <input type="text"  v-model="rate"  @keydown="numbersValidate"  @keyup="addcommasnew"name="rate" >
+        <label for="Amount">Total</label>
+        <input type="text"  v-model="total"  @keydown="numbersValidate"   @keyup="addcommasnew" name="total" >
+
+        <input type="button" value="reset" v-on:click="reset">
+        
+    </div>
+    <script>
+        var numbers = new Vue({
+  el: '#numbers',
+  data: {
+    amount: 0,
+    rate: 0,
+    total: 0,
+    namee: ''
+  },
+  methods: {
+      // addcommas(){
+      //   this.amount=parseFloat((this.amount).toString().replace(/,/,'')).toLocaleString();
+      //   this.rate=parseFloat((this.rate).toString().replace(/,/,'')).toLocaleString();
+      //   this.total=parseFloat((this.total).toString().replace(/,/,'')).toLocaleString();
+      // },
+      stringtoupper(){
+          this.namee=(this.namee).toString().toLocaleUpperCase();
+      },
+      numbersValidate (event) {
+    	const char = String.fromCharCode(event.keyCode)
+    	if (/[A-Z]/.test(char)) {
+      	event.preventDefault()
+      }
+    },
+    reset() {
+     debugger;
+     data=this.data;
+     var test="Demo";
+    },
+    addcommasnew(event){
+      // event.target.value=parseFloat((event.target.value).toString().replace(/,/,'')).toLocaleString();
+
+      event.target.value=parseFloat((event.target.value).toString().replace(/,/g, '')).toLocaleString();
+
+      if( event.target.value=='NaN'){
+        event.target.value=0;
+      }
+      
+      },
+
+  }
+})
+    </script>
+</body>
+</html>
